@@ -5,7 +5,7 @@ export default function App() {
   const [students, setStudents] = useState([]);
   const [form, setForm] = useState({ name: "", branch: "" });
 
-  const API_URL = "http://localhost:5000/api/students";
+  const API_URL = "https://mentor-session-3.onrender.com/api/students";
 
   useEffect(() => {
     fetchStudents();
