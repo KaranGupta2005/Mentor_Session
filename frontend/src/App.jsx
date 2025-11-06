@@ -27,7 +27,7 @@ export default function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(API_URL, form);4
+      await axios.post(API_URL, form);
       setForm({ name: "", branch: "" });
       fetchStudents();
     } catch (error) {
@@ -45,27 +45,17 @@ export default function App() {
   };
 
   return (
-    <div className="mx-auto max-w-2xl flex flex-col space-y-4">
-      <h1 >Student List</h1>
+    <div className="min-h-screen bg-green-400 flex flex-col items-center py-10">
+      <h1 className="text-3xl font-bold text-black bg-purple-300 px-6 py-3 mx-auto  shadow-lg mb-10">
+        Student Management
+      </h1>
 
-      {/* Student List */}
-      <div>
-        {students.length > 0 ? (
-          students.map((student) => (
-            <div key={student._id}>
-              <p>Name: {student.name}</p>
-              <p>Branch: {student.branch}</p>
-              <p>Added: {new Date(student.timeAdded).toLocaleString()}</p>
-              <button onClick={() => handleDelete(student._id)}>Delete</button>
-            </div>
-          ))
-        ) : (
-          <p>No students yet!</p>
-        )}
-      </div>
-
-      {/* Form */}
-      <form onSubmit={handleSubmit}>
+      {/* Form Section */}
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white border-4 border-green-700 p-6 rounded-xl shadow-md w-full max-w-md space-y-4"
+      >
+        <h2 className="text-s font-semibold text-gray-700">Add New Student</h2>
         <input
           type="text"
           name="name"
@@ -73,6 +63,7 @@ export default function App() {
           value={form.name}
           onChange={handleChange}
           required
+          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
         />
         <input
           type="text"
@@ -81,9 +72,51 @@ export default function App() {
           value={form.branch}
           onChange={handleChange}
           required
+          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
         />
-        <button type="submit">Add Student</button>
+        <button
+          type="submit"
+          className="w-full bg-green-300 text-white font-semibold py-2 rounded-lg hover:bg-green-700 transition"
+        >
+          Add Student
+        </button>
       </form>
+
+      {/* Student List Section */}
+      <div className="mt-10 w-full max-w-2xl">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">
+          Student List
+        </h2>
+
+        {students.length > 0 ? (
+          <div className="grid grid-cols-1 gap-4">
+            {students.map((student) => (
+              <div
+                key={student._id}
+                className="bg-white shadow-md p-4 rounded-lg flex justify-between items-center"
+              >
+                <div>
+                  <p className="font-semibold text-gray-800">
+                    {student.name}
+                  </p>
+                  <p className="text-gray-600 text-sm">{student.branch}</p>
+                  <p className="text-gray-400 text-xs">
+                    Added: {new Date(student.timeAdded).toLocaleString()}
+                  </p>
+                </div>
+                <button
+                  onClick={() => handleDelete(student._id)}
+                  className="bg-red-500 text-white px-4 py-1 rounded-lg hover:bg-red-600 transition"
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-600 text-center">No students yet!</p>
+        )}
+      </div>
     </div>
   );
 }
