@@ -5,7 +5,7 @@ const app = express();
 
 async function main() {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/chatdb');
+    await mongoose.connect('mongodb+srv://guptakaranport:karang2006@cluster0.gapyepy.mongodb.net/');
     console.log('Connected to MongoDB');
   } catch (err) {
     console.error('MongoDB connection error:', err);

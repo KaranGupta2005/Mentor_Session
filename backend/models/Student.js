@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const studentSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -6,6 +6,4 @@ const studentSchema = new mongoose.Schema({
   timeAdded: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('Student', studentSchema);
-
-
+module.exports = mongoose.model("Student", studentSchema);
